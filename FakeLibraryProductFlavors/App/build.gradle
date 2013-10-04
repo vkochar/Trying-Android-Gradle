@@ -5,7 +5,7 @@ repositories {
 }
 
 dependencies {
-    compile project(':TestLib')
+    compile project(':Lib')
     compile 'com.android.support:appcompat-v7:18.0.0'
 }
 
