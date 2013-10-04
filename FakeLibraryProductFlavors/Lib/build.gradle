@@ -1,0 +1,34 @@
+apply plugin: 'android-library'
+
+repositories {
+    mavenCentral()
+}
+
+android {
+    compileSdkVersion 18
+    buildToolsVersion "18.1.0"
+
+    defaultConfig {
+        minSdkVersion 8
+        targetSdkVersion 16
+    }
+}
+
+/**
+ * This creates two tasks,
+ *
+ *    prepareFree
+ *    preparePro
+ *
+ * Each of the tasks copies files from their respective directories i.e src/free or src/pro to the src/main direcotry.
+ */
+['pro', 'free'].each { type ->
+    task "prepare${type.capitalize()}"(type: Copy) {
+        from("src/${type}")
+        into("src/main")
+    }
+}
+
+dependencies {
+    compile 'com.android.support:appcompat-v7:18.0.0'
+}

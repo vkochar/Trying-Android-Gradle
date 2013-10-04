@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="lib_app_name">TestProLib</string>
+    <string name="lib_action_settings">ProSettings</string>
+    <string name="lib_hello_world">Pro Hello world!</string>
+
+</resources>

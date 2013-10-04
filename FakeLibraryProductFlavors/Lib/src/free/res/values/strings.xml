@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="lib_app_name">TestFreeLib</string>
+    <string name="lib_action_settings">FreeSettings</string>
+    <string name="lib_hello_world">Free Hello world!</string>
+
+</resources>
