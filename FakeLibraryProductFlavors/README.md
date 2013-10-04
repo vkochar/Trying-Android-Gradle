@@ -9,7 +9,7 @@ gradlew preparePro assemble
 
 and to use the lib with free code/resources included use
 
-gradlew preparePro assemble
+gradlew prepareFree assemble
 
 
   
