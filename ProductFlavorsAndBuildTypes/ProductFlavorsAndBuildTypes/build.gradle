@@ -79,8 +79,8 @@ android {
         }
     }
 
-    // creating two flavor groups
-    // one based on brand and the other based on target
+    // creating three flavor groups
+    // one based on brand and the other based on target and the last one for store.
     flavorGroups 'brand', 'target', 'store'
 
     productFlavors {
