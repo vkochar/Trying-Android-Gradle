@@ -1,0 +1,135 @@
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:0.6.+'
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+apply plugin: 'android'
+apply from: 'build-helper.gradle'
+
+repositories {
+    mavenCentral()
+}
+
+// Dependencies
+dependencies {
+    compile 'com.actionbarsherlock:actionbarsherlock:4.4.0@aar'
+    compile 'com.android.support:support-v4:18.0.0'
+}
+
+android {
+
+    compileOptions.encoding = "UTF-8"
+
+    compileSdkVersion 18
+    buildToolsVersion '18.1.0'
+
+    // used by the helper scripts to start the app
+    project.ext.launcher = 'com.f5.gradletest2.MainActivity'
+
+    defaultConfig {
+        minSdkVersion 8
+        targetSdkVersion 17
+    }
+
+    signingConfigs {
+        // signing info for release build type.
+        release {
+            storeFile file('test-release.keystore')
+            storePassword 'android'
+            keyAlias 'android'
+            keyPassword 'android'
+        }
+    }
+
+    // build types, debug build type signs with the default key, not zipaligned and not proguarded.
+    buildTypes {
+
+        /**
+         * Signed/ZipAligned apk
+         */
+        release {
+            // enable proguard.
+            runProguard true
+
+            // additional proguard config files supplied by each flavor.
+            proguardFile getDefaultProguardFile('proguard-android.txt')
+
+            // provide the signing info.
+            signingConfig signingConfigs.release
+        }
+
+        /**
+         * This buildType to be used when we do not want a signed apk.
+         * To keep in mind - the unsigned apk is not ZipAligned.
+         * So, the apk needs to be manually ZipAligned after signing
+         */
+        unsignedRelease {
+            runProguard true
+
+            // additional proguard config files supplied by each flavor.
+            proguardFile getDefaultProguardFile('proguard-android.txt')
+        }
+    }
+
+    // creating two flavor groups
+    // one based on brand and the other based on target
+    flavorGroups 'brand', 'target', 'store'
+
+    productFlavors {
+
+        /** START: TARGET FLAVOR GROUP **/
+        development {
+            flavorGroup 'target'
+            buildConfig 'public static final String TARGET = "DEVELOPMENT";'
+        }
+
+        staging {
+            flavorGroup 'target'
+            buildConfig 'public static final String TARGET = "STAGING";'
+        }
+
+        production {
+            flavorGroup 'target'
+            buildConfig 'public static final String TARGET = "PRODUCTION";'
+        }
+        /** END: TARGET **/
+
+        /** START: BRAND FLAVOR GROUP **/
+        brand1 {
+            flavorGroup 'brand'
+            packageName 'com.f5.gradletest2.brand1'
+
+            // additional brand specific proguard if needed
+            //proguardFile "src/${name}/proguard-project.txt"
+        }
+
+        brand2 {
+            flavorGroup 'brand'
+            packageName 'com.f5.gradletest2.brand2'
+
+            // additional brand specific proguard if needed
+            //proguardFile "src/${name}/proguard-project.txt"
+        }
+        /** END: BRAND **/
+
+        /** START: STORE FLAVOR GROUP **/
+        amazon {
+            flavorGroup 'store'
+            buildConfig 'public static final String STORE = "AMAZON";'
+        }
+
+        googleplay {
+            flavorGroup 'store'
+            buildConfig 'public static final String STORE = "GOOGLE_PLAY";'
+        }
+        /** END: STORE **/
+    }
+}

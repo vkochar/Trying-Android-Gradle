@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Brand1</string>
+    <string name="action_settings">Brand1 Settings</string>
+    <string name="hello_world">Hello world from brand1!</string>
+
+</resources>

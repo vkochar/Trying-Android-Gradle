@@ -1,0 +1,21 @@
+// Extras that are not a part of the build configuration or build itself will go here.
+
+// varun: Running from terminal/cmd line the install command does not start the app.
+// writing a hook to do so.
+android.applicationVariants.all { variant ->
+
+    // launch after install
+    if (variant.install != null) {
+        variant.install.doLast {
+
+            def packageSuffix = variant.buildType.packageNameSuffix ?: ""
+            def packageName = variant.productFlavors.packageName[0] ?: android.defaultConfig.packageName
+            def startupClass = packageName + packageSuffix + '/' + project.ext.launcher
+
+            def result = exec {
+                executable = 'adb'
+                args = ['shell', 'am', 'start', '-c', 'android.intent.category.LAUNCHER', '-n', startupClass]
+            }
+        }
+    }
+}
