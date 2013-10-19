@@ -29,7 +29,7 @@ android {
     compileOptions.encoding = "UTF-8"
 
     compileSdkVersion 18
-    buildToolsVersion '18.1.0'
+    buildToolsVersion '18.1.1'
 
     // used by the helper scripts to start the app
     project.ext.launcher = 'com.f5.gradletest2.MainActivity'
