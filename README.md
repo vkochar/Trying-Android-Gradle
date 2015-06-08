@@ -1,3 +1,5 @@
+DEPRECATED. OLD
+
 Trying-Android-Gradle
 =========================
 
